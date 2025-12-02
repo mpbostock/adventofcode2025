@@ -2,16 +2,16 @@ package mpbostock
 
 object Day01 {
   fun partOne(input: List<DialRotation>): Int {
-    val safeDial = input.fold(SafeDial(), { dial, rotation ->
+    val safeDial = input.fold(SafeDial()) { dial, rotation ->
       dial.rotate(rotation)
-    })
+    }
     return safeDial.numZeroCrossings
   }
 
   fun partTwo(input: List<DialRotation>): Int {
-    val safeDial = input.fold(SafeDial(countClickZeroCrossings = true), { dial, rotation ->
+    val safeDial = input.fold(SafeDial(countClickZeroCrossings = true)) { dial, rotation ->
       dial.rotate(rotation)
-    })
+    }
     return safeDial.numZeroCrossings
   }
 
@@ -47,9 +47,12 @@ object Day01 {
   ) {
     fun rotate(rotation: DialRotation): SafeDial {
       val newPosition = calculatePosition(position, rotation)
-      val clickZeroCrossings = countClickZeroCrossings(position, rotation)
-      val landOnZeroCrossings = if (newPosition == 0) 1 else 0
-      val newNumZeroCrossings = if (countClickZeroCrossings) clickZeroCrossings else landOnZeroCrossings
+      val newNumZeroCrossings =
+        if (countClickZeroCrossings) {
+          countClickZeroCrossings(position, rotation)
+        } else {
+          if (newPosition == 0) 1 else 0
+        }
       return copy(newPosition, numZeroCrossings + newNumZeroCrossings)
     }
 
