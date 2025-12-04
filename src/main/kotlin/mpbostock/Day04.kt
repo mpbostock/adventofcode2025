@@ -11,7 +11,7 @@ object Day04 {
 
     val totalRollsRemoved: Int
       get() {
-        fun removeAccessibleRolls(rollsOfPaper: Set<Coordinate>, numRollsRemoved: Int = 0): Int {
+        tailrec fun removeAccessibleRolls(rollsOfPaper: Set<Coordinate>, numRollsRemoved: Int = 0): Int {
           val accessibleRolls = findAccessibleRollsOfPaper(rollsOfPaper)
           return if (accessibleRolls.isEmpty()) {
             print { coord ->
