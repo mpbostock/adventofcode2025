@@ -68,6 +68,8 @@ interface Grid<T> {
     }
   }
 }
+fun String.squashSpaces(): String = this.replace("""\s+""".toRegex(), " ")
+fun String.squashAndTrim(): String = this.squashSpaces().trim()
 
 data class Coordinate(val x: Int, val y: Int) {
   operator fun plus(other: Coordinate) = Coordinate(x + other.x, y + other.y)
